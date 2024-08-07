@@ -1,5 +1,5 @@
-import { Button, Card, List, ListItem } from '@material-tailwind/react';
-import React, { useEffect, useState } from 'react'
+import { Button, Card, Input, List, ListItem } from '@material-tailwind/react';
+import React, {  useState } from 'react'
 
 const SearchForSpecificUser = () => {
     const [id,setId]=useState('');
@@ -21,17 +21,22 @@ const SearchForSpecificUser = () => {
         }
     }
   return (
-      <div className='bg-gray-300 h-96 w-fit ml-96 mt-8'>
+      <div className='bg-gray-300 h-96 ml-[35rem]  mt-8'>
           <div className='flex gap-4'>
-            <input className='h-10 rounded-lg px-3' type="text" placeholder='enter user id' value={id} onChange={(e)=>setId(e.target.value)}/>
-            <Button className='h-10 py-0' onClick={()=>fetchSpecificUserData()}>Get Data</Button>
+            <Input className='h-10 rounded-lg px-3' type="text" label='enter user id' value={id} onChange={(e)=>setId(e.target.value)}/>
+            <Button className='h-10 py-0 bg-blue-700' onClick={()=>fetchSpecificUserData()}>Fetch User</Button>
           </div>
           {
             specificUserData?(
-            specificUserData.map((userData)=>(
-                <Card key={userData.id} className='mt-8'>
+                  specificUserData.map(({ id, name, username, email, password } )=>(
+                
+                <Card key={id} className='mt-8'>
                     <List>
-                        <ListItem>{userData.id}</ListItem>
+                        <ListItem>ID: {id}</ListItem>
+                        <ListItem>Name: {name}</ListItem>
+                        <ListItem>UserName: {username}</ListItem>
+                        <ListItem>Email: {email}</ListItem>
+                        <ListItem>Password: {password}</ListItem>
                     </List>
                 </Card>
             )))

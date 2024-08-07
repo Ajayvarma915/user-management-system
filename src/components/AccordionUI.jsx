@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React from "react";
 import {
     Card,
     Typography,
@@ -7,19 +7,16 @@ import {
     ListItem,
     ListItemPrefix,
 } from "@material-tailwind/react";
-import {
-    UserCircleIcon,
-    Cog6ToothIcon,
-    InboxIcon,
-    PowerIcon,
-} from "@heroicons/react/24/solid";
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import UpdateIcon from '@mui/icons-material/Update';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function Sidebar({setActiveComponent}) {
         return (
         <>
-        <Card className="h-screen w-full max-w-[21rem] p-4 shadow-xl shadow-blue-gray-900/5">
+        <Card className="h-screen w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-4">
                 <Typography variant="h5" color="blue-gray">
                     DashBoard
@@ -39,17 +36,23 @@ export function Sidebar({setActiveComponent}) {
                     </ListItemPrefix>
                     Search For Specific User
                 </ListItem>
-                <ListItem>
-                    <ListItemPrefix>
-                        <Cog6ToothIcon/>
+                <ListItem onClick={()=>setActiveComponent('addNewUser')}>
+                    <ListItemPrefix className="ml-[3px]">
+                        <GroupAddIcon/>
                     </ListItemPrefix>
-                    Settings
+                    Create New User
                 </ListItem>
-                <ListItem>
+                <ListItem onClick={()=>setActiveComponent('updateUserDetails')}>
                     <ListItemPrefix>
-                        <PowerIcon/>
+                        <UpdateIcon/>
                     </ListItemPrefix>
-                    Log Out
+                    Update User Details
+                </ListItem>
+                <ListItem onClick={()=>setActiveComponent('deleteUser')}>
+                    <ListItemPrefix>
+                        <DeleteIcon/>
+                    </ListItemPrefix>
+                    Delete User
                 </ListItem>
             </List>
         </Card>

@@ -1,12 +1,5 @@
 export const usersData=[
           {
-                    "id": "2",
-                    "name": "Ervin Howell",
-                    "username": "Antonette",
-                    "email": "Shanna@melissa.tv",
-                    "password": "Ervin@123"
-          },
-          {
                     "id": "3",
                     "name": "Clementine Bauch",
                     "username": "Samantha",
@@ -67,5 +60,5 @@ export const usersData=[
                     "name": "vivek",
                     "email": "vivek@email.com",
                     "password": "vivek@123"
-          },
+          }
 ]
