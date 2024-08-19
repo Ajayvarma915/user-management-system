@@ -1,6 +1,6 @@
-import { Button, Card, Input, List, ListItem } from '@material-tailwind/react';
+import { Card, Input, List, ListItem } from '@material-tailwind/react';
 import React, {  useState } from 'react'
-
+import {motion} from 'framer-motion'
 const SearchForSpecificUser = () => {
     const [id,setId]=useState('');
     const [specificUserData, setSpecificUsersData] = useState([]);
@@ -21,16 +21,31 @@ const SearchForSpecificUser = () => {
         }
     }
   return (
-      <div className='bg-gray-300 h-96 ml-[35rem]  mt-8'>
-          <div className='flex gap-4'>
+      <div className='h-full w-full'>
+        <motion.h1 className='text-center -ml-12 text-3xl mt-8'
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        >Search For A Specific User</motion.h1>
+        <hr className='mt-6'/>
+          <div className='mx-[40rem] mt-10 h-fit'>
+              <motion.div className='flex gap-4 w-fit bg-[#CDE8E5] p-4'
+          initial={{opacity:0,x:-50}}
+          animate={{opacity:1,x:0}}
+          transition={{delay:0.3}}
+          >
             <Input className='h-10 rounded-lg px-3' type="text" label='enter user id' value={id} onChange={(e)=>setId(e.target.value)}/>
-            <Button className='h-10 py-0 bg-blue-700' onClick={()=>fetchSpecificUserData()}>Fetch User</Button>
-          </div>
+            <button className='h-10 w-fit rounded-lg p-2 bg-blue-700' onClick={()=>fetchSpecificUserData()}>Fetch</button>
+          </motion.div>
           {
             specificUserData?(
                   specificUserData.map(({ id, name, username, email, password } )=>(
                 
-                <Card key={id} className='mt-8'>
+                <motion.div key={id} className='mt-10 ml-[0rem] bg-[#CDE8E5] w-[20rem]'
+                initial={{opacity:0,y:50}}
+                animate={{opacity:1,y:0}}
+                transition={{delay:0.3}}
+                >
                     <List>
                         <ListItem>ID: {id}</ListItem>
                         <ListItem>Name: {name}</ListItem>
@@ -38,11 +53,12 @@ const SearchForSpecificUser = () => {
                         <ListItem>Email: {email}</ListItem>
                         <ListItem>Password: {password}</ListItem>
                     </List>
-                </Card>
+                </motion.div>
             )))
             :
             <h1 className='mt-8 text-2xl'>No user found with that ID.</h1>
           }
+      </div>
       </div>
   )
 }

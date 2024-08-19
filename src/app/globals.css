@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +30,26 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+} */
+
+.custom-link {
+    /* Tailwind's blue-500 color */
+    text-decoration: underline !important;
+    color: #FFF;
+}
+
+/* global.css */
+input::placeholder {
+    color: #FFF;
+    margin-left: 2px;
+    /* Change to the desired color */
+}
+
+.custom-color{
+    border:2px solid rgba(255,255,255,.2);
+    box-shadow: 0 0 10px rgba(255,255,255,.2);
+}
+
+.responsive{
+    width: 400px;
 }

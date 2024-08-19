@@ -1,39 +1,11 @@
-'use client'
-import Image from "next/image";
-import { Sidebar } from '../components/AccordionUI';
-import { useState } from "react";
-import AllUsers from "@/components/AllUsers";
-import SearchForSpecificUser from "@/components/SearchForSpecificUser";
-import CreateNewUser from "@/components/createNewUser";
-import UpdateUserDetails from "@/components/UpdateUserDetails";
-import DeleteUser from "@/components/DeleteUser";
-export default function Home() {
-
-    const [activeComponent, setActiveComponent] = useState('');
-    
+import Login from '@/common/Login'
+import React from 'react'
+const page = () => {
   return (
-    <div className="bg-gray-300 h-screen flex justify-start items-center">
-        <div className="flex">
-            <Sidebar setActiveComponent={setActiveComponent}/>
-            {
-                  activeComponent &&
-                  (<div>
-                      {activeComponent === 'AllUsers' && <AllUsers />}
-                      {
-                        activeComponent==='specificUserData' && <SearchForSpecificUser/>
-                      }
-                      {
-                        activeComponent==='addNewUser' && <CreateNewUser/>
-                      }
-                      {
-                          activeComponent ==='updateUserDetails' && <UpdateUserDetails/>
-                      }
-                      {
-                          activeComponent ==='deleteUser' && <DeleteUser/>
-                      }
-                  </div>)
-            }
-        </div>
-    </div>
-  );
+      <main className="flex h-screen justify-center items-center bg-[url('/images/background_image.jpg')] bg-no-repeat bg-cover bg-center">
+        <Login/>
+    </main>
+  )
 }
+
+export default page

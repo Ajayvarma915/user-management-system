@@ -55,10 +55,10 @@ export const usersData=[
                     "email": "Rey.Padberg@karina.biz",
                     "password": "Clementina@123"
           },
-          {
-                    "id": "11",
-                    "name": "vivek",
-                    "email": "vivek@email.com",
-                    "password": "vivek@123"
-          }
+          
 ]
+
+export const getUserByEmail=(email)=>{
+    const found=usersData.find((eachUser)=>eachUser.email===email)
+    return found;
+}
