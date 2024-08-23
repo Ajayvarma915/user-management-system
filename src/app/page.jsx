@@ -1,4 +1,4 @@
-import Login from '@/common/Login'
+import Login from '../common/Login'
 import React from 'react'
 const page = () => {
   return (
