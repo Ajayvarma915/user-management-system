@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import Options from "@/components/options";
+import Options from "../../components/Options";
 import { redirect } from "next/navigation";
 export default async function Home() {
 
