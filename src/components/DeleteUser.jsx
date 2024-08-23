@@ -23,14 +23,14 @@ const DeleteUser = () => {
         return toast.error('User Id Not Found.')
     }
   return (
-    <div className='h-full w-full'>
-        <motion.h1 className='text-center -ml-[12rem] text-3xl mt-8'
+    <div className='h-full w-full flex flex-col items-center'>
+        <motion.h1 className='text-center md:-ml-[0rem] text-3xl mt-8'
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
         >Delete User</motion.h1>
-        <hr className='mt-6' />
-          <motion.div className='bg-[#CDE8E5] h-fit w-80 mx-[35rem] mt-10 p-4 flex flex-col items-center'
+        <hr className='mt-6 w-full'  />
+          <motion.div className='bg-[#CDE8E5] h-fit w-80  md:ml-[0rem] mt-10 p-4 flex flex-col items-center'
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}

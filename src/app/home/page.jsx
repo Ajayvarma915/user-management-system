@@ -6,8 +6,9 @@ export default async function Home() {
     const session=await auth();
     
     if(!session?.user) redirect('/');
+    
     return (
-        <div>
+        <div className="h-screen w-screen overflow-hidden">
             <Options/>
         </div>
     );

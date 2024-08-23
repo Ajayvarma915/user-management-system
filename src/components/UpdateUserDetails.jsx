@@ -56,14 +56,14 @@ const UpdateUserDetails = () => {
     }
 
   return (
-    <div className='h-full w-full '>
-        <motion.h1 className='text-center -ml-[12rem] text-3xl mt-8'
+    <div className='h-full w-full flex flex-col items-center'>
+        <motion.h1 className='text-center md:ml-[0rem] text-3xl mt-8'
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
         >Update User Details</motion.h1>
-        <hr className='mt-6' />
-          <motion.div className='bg-[#CDE8E5] h-fit w-80 ml-[35rem] mt-10 p-4'
+        <hr className='mt-6 w-full' />
+          <motion.div className='bg-[#CDE8E5] h-fit w-80 mt-10 md:ml-[0rem] p-4'
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}
