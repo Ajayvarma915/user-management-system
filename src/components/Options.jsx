@@ -1,11 +1,11 @@
 'use client'
 import React, { useState } from 'react'
-import { Sidebar } from "@/components/AccordionUI";
-import AllUsers from "@/components/AllUsers";
-import SearchForSpecificUser from "@/components/SearchForSpecificUser";
-import CreateNewUser from "@/components/CreateNewUser";
-import UpdateUserDetails from "@/components/UpdateUserDetails";
-import DeleteUser from "@/components/DeleteUser";
+import { Sidebar } from "./AccordionUI";
+import AllUsers from "./AllUsers";
+import SearchForSpecificUser from "./SearchForSpecificUser";
+import CreateNewUser from "./CreateNewUser";
+import UpdateUserDetails from "./UpdateUserDetails";
+import DeleteUser from "./DeleteUser";
 const Options = () => {
     const [activeComponent, setActiveComponent] = useState('AllUsers');
 

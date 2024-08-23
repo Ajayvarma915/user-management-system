@@ -1,4 +1,4 @@
-import { Card, Input, List, ListItem } from '@material-tailwind/react';
+import { Input, List, ListItem } from '@material-tailwind/react';
 import React, {  useState } from 'react'
 import {motion} from 'framer-motion'
 const SearchForSpecificUser = () => {
