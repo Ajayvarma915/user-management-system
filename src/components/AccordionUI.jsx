@@ -36,7 +36,7 @@ export function Sidebar({setActiveComponent}) {
                     </ListItemPrefix>
                     Search For Specific User
                 </ListItem>
-                <ListItem className="text-white hover:bg-blue-700 md:w-[13rem] xl:hover:w-full xl:w-full" onClick={()=>setActiveComponent('addNewUser')}>
+                <ListItem className="text-white hover:bg-blue-700 md:w-[13rem] xl:hover:w-full xl:w-full" onClick={()=>setActiveComponent('createNewUser')}>
                     <ListItemPrefix className="ml-[3px]">
                         <GroupAddIcon/>
                     </ListItemPrefix>

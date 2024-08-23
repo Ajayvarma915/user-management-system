@@ -21,7 +21,7 @@ const Options = () => {
                         activeComponent === 'specificUserData' && <SearchForSpecificUser />
                     }
                     {
-                        activeComponent === 'addNewUser' && <CreateNewUser />
+                        activeComponent === 'createNewUser' && <CreateNewUser />
                     }
                     {
                         activeComponent === 'updateUserDetails' && <UpdateUserDetails />
