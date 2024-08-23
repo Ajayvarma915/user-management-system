@@ -5,7 +5,7 @@ import AllUsers from "./AllUsers";
 import SearchForSpecificUser from "./SearchForSpecificUser";
 import UpdateUserDetails from "./UpdateUserDetails";
 import DeleteUser from "./DeleteUser";
-import CreateNewUser from '../components/DeleteUser';
+import CreateNewUser from '../components/CreateNewUser';
 const Options = () => {
     const [activeComponent, setActiveComponent] = useState('AllUsers');
 
@@ -21,7 +21,7 @@ const Options = () => {
                         activeComponent === 'specificUserData' && <SearchForSpecificUser />
                     }
                     {
-                        activeComponent === 'createNewUser' && <CreateNewUser/>
+                        activeComponent === 'CreateNewUser' && <CreateNewUser/>
                     }
                     {
                         activeComponent === 'updateUserDetails' && <UpdateUserDetails />
