@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Sidebar } from "./AccordionUI";
 import AllUsers from "./AllUsers";
 import SearchForSpecificUser from "./SearchForSpecificUser";
-import CreateNewUser from "./CreateNewUser";
 import UpdateUserDetails from "./UpdateUserDetails";
 import DeleteUser from "./DeleteUser";
+import CreateNewUser from "./CreateNewUser";
 const Options = () => {
     const [activeComponent, setActiveComponent] = useState('AllUsers');
 
