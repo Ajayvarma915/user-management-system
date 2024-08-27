@@ -1,25 +1,23 @@
-import { usersData } from "@/app/utils/Data"
+import { usersData } from "@/app/utils/Data";
 import { NextResponse } from "next/server";
 import fs from 'fs'
-import { log } from "console";
 
 // getting all the users data
-export function GET(){
-    const data=usersData;
-    return NextResponse.json({data},{status:200});
-}
+// export async function GET(){
+//     const data=await usersData;
+//     return NextResponse.json({data},{status:200});
+// }
 
 //Creating the new user
 
 export async function POST(req,res){
-    const {id,name,email,password}=await req.json();
-    if(!id, !name || !email || !password){
+    const { id, name,username,email,password}=await req.json();
+    if (!id || !name || !email || !password){
         return NextResponse.json({result:"required all fields"},{status:404})
     }
     else{
-        usersData.push({id,name,email,password});
-        
-        const updatedUsersData=usersData;
+        usersData.push({ id, name, username, email, password });
+        const updatedUsersData = usersData;
         const updatedData=JSON.stringify(updatedUsersData,null,2);
         fs.writeFileSync("./src/app/utils/Data.jsx",`export const usersData=${updatedData}`,"utf-8");
         return NextResponse.json({result:"Data added successfully"},{status:200});

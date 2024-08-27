@@ -9,13 +9,13 @@ const Register = () => {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [userName, setUserName] = useState('');
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!id || !name || !email || !userName || !password) {
+        if (!id || !name || !email || !username || !password) {
             toast.error('Enter All The Fields');
             return;
         }
@@ -24,22 +24,22 @@ const Register = () => {
             toast.error('User Id already exists.Go To Login Page');
             return;
         }
-
-        const response = await fetch('/api/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id, name, userName, email, password })
-        })
-        if (response.status === 200) {
-            toast('User Created Successfully');
-            setId('');
-            setEmail('');
-            setUserName('');
-            setPassword('');
-            setName('');
-        }
+        
+            const response = await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, name, username, email, password })
+            })
+            if (response.status === 200) {
+                toast('User Created Successfully');
+                setId('');
+                setEmail('');
+                setUserName('');
+                setPassword('');
+                setName('');
+            }
     }
 
     return (
@@ -49,7 +49,7 @@ const Register = () => {
             items-center gap-3'>
                     <Input color='white' label="enter user id" type="text" value={id} onChange={(e) => setId(e.target.value)} />
                     <Input color='white' type="text" label="enter the name" value={name} onChange={(e) => setName(e.target.value)} />
-                    <Input color='white' type="text" label="enter username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                    <Input color='white' type="text" label="enter username" value={username} onChange={(e) => setUserName(e.target.value)} />
                     <Input color='white' type="email" label="enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <Input color='white' type="password" label="enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <Button className='mt-2 bg-white text-black w-full rounded-full p-2' type='submit'>Submit</Button>

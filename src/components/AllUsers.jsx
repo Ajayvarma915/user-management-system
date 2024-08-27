@@ -1,13 +1,15 @@
 import { List, ListItem } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
+import { usersData } from '@/app/utils/Data';
 const AllUsers = () => {
-    const [usersData,setUsersData]=useState([]);
+    const [userData,setUsersData]=useState([]);
     const fetchAllUsersData=async ()=>{
         try {
-            const response = await fetch('api/users')
-            const usersData = await response.json();
-            setUsersData(usersData.data);
+            // const response = await fetch('api/users')
+            // const usersData = await response.json();
+            const data= usersData;
+            setUsersData(data);
         } catch (error) {
             console.log(error.message);
         }
@@ -25,7 +27,7 @@ const AllUsers = () => {
         <hr className='mt-6' />
         <div className='grid grid-cols-1 mt-10 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
         {
-            usersData?.map((eachUser,i)=>(
+            userData?.map((eachUser,i)=>(
                 <motion.div key={eachUser.id} className='m-4 w-[20rem] bg-[#CDE8E5] rounded-lg md:w-[16.5rem]2xl:w-[18rem]'
                 initial={{opacity:0,y:50}}
                 animate={{opacity:1,y:0}}

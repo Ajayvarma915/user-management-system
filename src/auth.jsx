@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { getUserByEmail } from "./app/utils/Data";
+import getUserByEmail from "./app/utils/GetUserByEmail";
+import { GenerateHash } from "./app/functions/GenerateHash";
+import {compare} from 'bcryptjs'
 
 export const {
     handlers:{GET,POST},
@@ -21,16 +23,19 @@ export const {
             async authorize(credentials){
                 if(!credentials) return null;
                 try {
-                    const user=getUserByEmail(credentials?.email);
-                     
+                    const user=await getUserByEmail(credentials?.email);
+                    // console.log(user);
+                    
                     if(user){
-                        // console.log(credentials.password+" "+user.password);
-                        
-                        const isMatch=credentials?.password===user?.password
-                        console.log(isMatch);
-                        
-                        if(isMatch) return user;
-                        else throw new Error("Check Your Password")
+                        const password=await GenerateHash(user.password);
+                        // console.log("credentials",password+" "+"user password"+user.password);
+                        if(password){
+                            const isMatch=await compare(user.password,password)
+                            console.log(isMatch);
+                            
+                            if(isMatch) return user;
+                            else throw new Error("Check Your Password")
+                        }
                     }
                     else throw new Error("User Not Found")
                 } catch (error) {
