@@ -50,7 +50,7 @@ const Register = () => {
             items-center gap-3'>
                     <Input color='white' label="enter user id" type="text" value={id} onChange={(e) => setId(e.target.value)} />
                     <Input color='white' type="text" label="enter the name" value={name} onChange={(e) => setName(e.target.value)} />
-                    <Input color='white' type="text" label="enter username" value={username} onChange={(e) => setUserName(e.target.value)} />
+                    <Input color='white' type="text" label="enter username" value={userName} onChange={(e) => setUserName(e.target.value)} />
                     <Input color='white' type="email" label="enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <Input color='white' type="password" label="enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <Button className='mt-2 bg-white text-black w-full rounded-full p-2' type='submit'>Submit</Button>
