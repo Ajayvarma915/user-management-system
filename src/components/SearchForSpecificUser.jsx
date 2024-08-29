@@ -51,7 +51,6 @@ const SearchForSpecificUser = () => {
                         <ListItem>Name: {name}</ListItem>
                         <ListItem>UserName: {username}</ListItem>
                         <ListItem>Email: {email}</ListItem>
-                        <ListItem>Password: {password}</ListItem>
                     </List>
                 </motion.div>
             )))

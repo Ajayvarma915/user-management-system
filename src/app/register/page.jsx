@@ -4,18 +4,19 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GenerateHash } from '../functions/GenerateHash';
 
 const Register = () => {
     const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [username, setUserName] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!id || !name || !email || !username || !password) {
+        if (!id || !name || !email || !userName || !password) {
             toast.error('Enter All The Fields');
             return;
         }
@@ -24,13 +25,13 @@ const Register = () => {
             toast.error('User Id already exists.Go To Login Page');
             return;
         }
-        
+            const newPassword=await GenerateHash(password);
             const response = await fetch('/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id, name, username, email, password })
+                body: JSON.stringify({ id, name, userName, email, newPassword })
             })
             if (response.status === 200) {
                 toast('User Created Successfully');

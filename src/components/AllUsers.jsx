@@ -36,7 +36,7 @@ const AllUsers = () => {
                     <List className='md:text-sm 2xl:text-base'>
                         <ListItem><b>ID : </b><span className='ml-2'>{eachUser.id}</span></ListItem>
                         <ListItem><b>Name : </b><span className='ml-2'>{eachUser.name}</span></ListItem>
-                        <ListItem><b>UserName : </b><span className='ml-2'>{eachUser.username}</span></ListItem>
+                        <ListItem><b>UserName : </b><span className='ml-2'>{eachUser.userName}</span></ListItem>
                         <ListItem><b>Email :</b> <span className='ml-2'>{eachUser.email}</span></ListItem>
                     </List>
                 </motion.div>

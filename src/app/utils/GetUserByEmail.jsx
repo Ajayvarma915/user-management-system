@@ -1,7 +1,8 @@
-import { usersData } from "./Data";
+import {usersData} from "./Data";
 const getUserByEmail =(email) => {
-    const newUsersData =usersData;
-    const found=newUsersData.find((eachUser)=>eachUser.email===email);
+    const newUserData = usersData;
+    // console.log(newUsersData);
+    const found=newUserData.find((eachUser)=>eachUser.email===email);
     return found;
 }
 

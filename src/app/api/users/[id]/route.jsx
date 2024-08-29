@@ -1,4 +1,4 @@
-import { usersData } from "@/app/utils/Data"
+import {usersData}  from "@/app/utils/Data"
 import { NextResponse } from "next/server";
 import fs from 'fs'
 

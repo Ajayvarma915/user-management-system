@@ -1,4 +1,4 @@
-import { usersData } from "@/app/utils/Data";
+import {usersData}  from "@/app/utils/Data";
 import { NextResponse } from "next/server";
 import fs from 'fs'
 
@@ -11,12 +11,12 @@ import fs from 'fs'
 //Creating the new user
 
 export async function POST(req,res){
-    const { id, name,username,email,password}=await req.json();
-    if (!id || !name || !email || !password){
+    const { id, name, userName, email, newPassword }=await req.json();
+    if (!id || !name || !email || !userName || !newPassword){
         return NextResponse.json({result:"required all fields"},{status:404})
     }
     else{
-        usersData.push({ id, name, username, email, password });
+        usersData.push({ id, name, userName, email, newPassword });
         const updatedUsersData = usersData;
         const updatedData=JSON.stringify(updatedUsersData,null,2);
         fs.writeFileSync("./src/app/utils/Data.jsx",`export const usersData=${updatedData}`,"utf-8");

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {motion} from 'framer-motion'
+import { GenerateHash } from '@/app/functions/GenerateHash';
 
 const CreateNewUser = () => {
     const [id,setId]=useState('');
@@ -24,13 +25,13 @@ const CreateNewUser = () => {
             toast('User Id already exists.Update UserDetails In Update Section');
             return;
         }
-
+        const newPassword=await GenerateHash(password,5);
         const response=await fetch('/api/users',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
             },
-            body:JSON.stringify({id,name,userName,email,password})
+            body:JSON.stringify({id,name,userName,email,newPassword})
         })
         if(response.status===200){
             toast('User Created Successfully');
