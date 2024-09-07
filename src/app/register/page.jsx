@@ -21,26 +21,29 @@ const Register = () => {
             return;
         }
         const response1 = await fetch(`/api/users/${id}`);
+        // console.log("response1 status: ",response1.status);
+        
         if (response1.status === 200) {
             toast.error('User Id already exists.Go To Login Page');
             return;
         }
-            const newPassword=await GenerateHash(password);
-            const response = await fetch('/api/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id, name, userName, email, newPassword })
-            })
-            if (response.status === 200) {
-                toast('User Created Successfully');
-                setId('');
-                setEmail('');
-                setUserName('');
-                setPassword('');
-                setName('');
-            }
+        
+        const newPassword = await GenerateHash(password);
+        const response = await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, name, userName, email, newPassword })
+        })
+        if (response.status === 200) {
+            toast('User Created Successfully');
+            setId('');
+            setEmail('');
+            setUserName('');
+            setPassword('');
+            setName('');
+        }
     }
 
     return (

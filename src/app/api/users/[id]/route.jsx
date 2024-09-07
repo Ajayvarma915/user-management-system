@@ -1,15 +1,26 @@
-import {usersData}  from "@/app/utils/Data"
 import { NextResponse } from "next/server";
-import fs from 'fs'
+import {doc,getDoc,deleteDoc} from 'firebase/firestore'
+import { db } from "@/app/firebase";
 
 //search for a specific user
 export async function GET(_,res){
     const {id}=await res.params;
-    const user=usersData.filter((user)=>id===user.id);
-    if(user.length===0){
-        return NextResponse.json({id},{status:404});
+    //getting specific user from firestore
+    console.log(id);
+    
+    try {
+        const docRef=doc(db,'users',id);
+        const docSnap=await getDoc(docRef);
+        // console.log(docSnap.data());
+        
+        if(docSnap.exists()){
+            return NextResponse.json({user:docSnap.data()},{status:200});
+        }
+        console.log("No such document exists");
+        return NextResponse.json({result:"user not found"},{status:404});
+    } catch (error) {
+        return NextResponse.json({result:"failed to fetch user"},{status:404})
     }
-    return NextResponse.json({user},{status:200});
 }
 
 // login
@@ -31,13 +42,13 @@ export async function POST(req, res) {
 
 export async function DELETE(req,res){
     const {id}=res.params;
-    const userIdx=usersData.findIndex((user)=>user.id===id);
-    if(userIdx==-1){
-        return NextResponse.json({result:"user data not found"},{status:404});
+    // console.log(id);
+    try {
+        const userDoc = doc(db, 'users', id);
+        await deleteDoc(userDoc);
+        return NextResponse.json({ result:"user data deleted successfully"},{status:200});
+    } catch (error) {
+        console.log(error.message);
+        return NextResponse.json({result:"user not found"},{status:404});
     }
-    usersData.splice(userIdx,1);
-    const updatedUsersData = usersData;
-    const updatedData = JSON.stringify(updatedUsersData, null, 200);
-    fs.writeFileSync("./src/app/utils/Data.jsx", `export const usersData=${updatedData}`, "utf-8");
-    return NextResponse.json({ result: "UserData updated successfully" }, { status: 200 });
 }

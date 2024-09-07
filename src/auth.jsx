@@ -22,16 +22,16 @@ export const {
             async authorize(credentials){
                 if(!credentials) return null;
                 try {
-                    const user=getUserByEmail(credentials?.email);
-                    // console.log(user);
+                    const user=await getUserByEmail(credentials?.email);
+                    // console.log(user);  
                     
                     if(user){
                         // console.log("credentials",credentials?.password+" "+"user password : "+user.newPassword);
-                            const isMatch=await compare(credentials?.password,user.newPassword)
-                            console.log(isMatch);
-                            
-                            if(isMatch) return user;
-                            else throw new Error("Check Your Password")
+                        const isMatch=await compare(credentials?.password,user.newPassword)
+                        // console.log(isMatch);
+                        
+                        if(isMatch) return user;
+                        else throw new Error("Check Your Password")
                     }
                     else throw new Error("User Not Found")
                 } catch (error) {

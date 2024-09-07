@@ -4,22 +4,38 @@ import {motion} from 'framer-motion'
 const SearchForSpecificUser = () => {
     const [id,setId]=useState('');
     const [specificUserData, setSpecificUsersData] = useState([]);
+    const [loading,setLoading]=useState(false);
+    const [error,setError]=useState(false);
+
     const fetchSpecificUserData = async () => {
         try {
             const response = await fetch(`/api/users/${id}`)
-            console.log(response);
             if(response.status===200){
+                setLoading(true);
+                setError(false);
                 const data=await response.json();
                 setSpecificUsersData(data.user);
             }
             else{
-                console.error("Invalid ID found");
-                setSpecificUsersData(null);
+                console.log("Invalid ID found");
+                setSpecificUsersData([]);
+                setLoading(false);
+                setError(true);
             }
         } catch (error) {
+            console.log("failed to fetch");
+            setLoading(false);
+            setError(true);
+            setSpecificUsersData([]);
             console.log(error.message);
         }
     }
+    const handleChange=(e)=>{
+        setId(e.target.value);
+        setSpecificUsersData([]);
+        setLoading(false);
+    }
+    console.log("user data",specificUserData);
   return (
       <div className='h-full w-full flex flex-col items-center'>
         <motion.h1 className='text-center md:ml-[0rem] text-3xl mt-8 '
@@ -34,28 +50,28 @@ const SearchForSpecificUser = () => {
         animate={{opacity:1,x:0}}
         transition={{delay:0.3}}
         >
-            <Input className='h-10 rounded-lg px-3' type="text" label='enter user id' value={id} onChange={(e)=>setId(e.target.value)}/>
+                  <Input className='h-10 rounded-lg px-3' type="text" label='enter user id' value={id} onChange={(e) => handleChange(e)}/>
             <button className='h-10 w-fit rounded-lg p-2 bg-blue-700' onClick={()=>fetchSpecificUserData()}>Fetch</button>
           </motion.div>
           {
-            specificUserData?(
-                  specificUserData.map(({ id, name, username, email, password } )=>(
-                
-                <motion.div key={id} className='mt-10 ml-[0rem] bg-[#CDE8E5] w-[20rem] '
+            specificUserData && loading?(
+                <motion.div key={id} className='mt-10 ml-[0rem] bg-[#CDE8E5] w-[20rem] rounded-sm'
                 initial={{opacity:0,y:50}}
                 animate={{opacity:1,y:0}}
                 transition={{delay:0.3}}
                 >
                     <List>
-                        <ListItem>ID: {id}</ListItem>
-                        <ListItem>Name: {name}</ListItem>
-                        <ListItem>UserName: {username}</ListItem>
-                        <ListItem>Email: {email}</ListItem>
+                        <ListItem>ID : {specificUserData.id}</ListItem>
+                        <ListItem>Name : {specificUserData.name}</ListItem>
+                        <ListItem>UserName : {specificUserData.userName}</ListItem>
+                        <ListItem>Email : {specificUserData.email}</ListItem>
                     </List>
                 </motion.div>
-            )))
+            )
             :
-            <h1 className='mt-8 text-2xl'>No user found with that ID.</h1>
+            (
+            id && error && <h1 className='mt-8 text-2xl'>No user found with that ID.</h1>
+            )
           }
       </div>
       </div>

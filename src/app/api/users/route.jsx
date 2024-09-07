@@ -1,14 +1,8 @@
-import {usersData}  from "@/app/utils/Data";
 import { NextResponse } from "next/server";
-import fs from 'fs'
+import { setDoc, doc, getDoc, updateDoc} from 'firebase/firestore'
+import { db } from "@/app/firebase";
+import { GenerateHash } from "@/app/functions/GenerateHash";
 
-// getting all the users data
-// export async function GET(){
-//     const data=await usersData;
-//     return NextResponse.json({data},{status:200});
-// }
-
-//Creating the new user
 
 export async function POST(req,res){
     const { id, name, userName, email, newPassword }=await req.json();
@@ -16,35 +10,39 @@ export async function POST(req,res){
         return NextResponse.json({result:"required all fields"},{status:404})
     }
     else{
-        usersData.push({ id, name, userName, email, newPassword });
-        const updatedUsersData = usersData;
-        const updatedData=JSON.stringify(updatedUsersData,null,2);
-        fs.writeFileSync("./src/app/utils/Data.jsx",`export const usersData=${updatedData}`,"utf-8");
-        return NextResponse.json({result:"Data added successfully"},{status:200});
+        //adding data to firestore
+        try {
+            const usersCollection=doc(db,'users',id);
+            await setDoc(usersCollection,{id,name,userName,email,newPassword});
+            return NextResponse.json({result:"Data Added Successfully"},{status:200});
+        } catch (error) {
+            return NextResponse.json({result:"error adding data"},{status:404})
+        }
     }
 }
 
 // updating the user data
 
 export async function PUT(req,res){
-    let {id,name,email,password}=await req.json();
-    console.log(id,name,email,password);
-    const userData=usersData.findIndex((user)=>user.id===id);
-    console.log(userData);
-    if(userData===-1){
-        return NextResponse.json({result:"enter a valid user id"},{status:404})
+    let {id,name,email,userName,password}=await req.json();
+    // console.log(id,name,email,password);
+    const userDocRef=doc(db,'users',id);
+    const userdata=await getDoc(userDocRef);
+    if(!userdata.exists()){
+        return NextResponse.json({result:"User Id Doesn't Exist! Create One"},{status:404});
     }
-    if(name){
-        usersData[userData].name=name;
+    const userDoc=doc(db,'users',id);
+    let updatedData={}
+    updatedData.id=id || userdata.data().id;
+    updatedData.name=name || userdata.data().name;
+    updatedData.email=email || userdata.data().email;
+    updatedData.userName=userName || userdata.data().userName;
+    let hashedPassword=await GenerateHash(password || userdata.data().newPassword);
+    updatedData.newPassword=hashedPassword;
+    try {
+        await updateDoc(userDoc, updatedData);
+        return NextResponse.json({ result: "user data updated successfully" }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({result:"failed to update users data"},{status:404});
     }
-    if(email){
-        usersData[userData].email = email;
-    }
-    if(password){
-        usersData[userData].password = password;
-    }
-    const updatedUsersData = usersData;
-    const updatedData = JSON.stringify(updatedUsersData, null, 2);
-    fs.writeFileSync("./src/app/utils/Data.jsx", `export const usersData=${updatedData}`, "utf-8");
-    return NextResponse.json({ result: "UserData updated successfully" }, { status: 200 });
 }

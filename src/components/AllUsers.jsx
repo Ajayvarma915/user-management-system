@@ -1,15 +1,20 @@
 import { List, ListItem } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
-import { usersData } from '@/app/utils/Data';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/app/firebase';
 const AllUsers = () => {
     const [userData,setUsersData]=useState([]);
     const fetchAllUsersData=async ()=>{
         try {
             // const response = await fetch('api/users')
             // const usersData = await response.json();
-            const data= usersData;
-            setUsersData(data);
+            const usersCollection=collection(db,'users');
+            const querySnapshot=await getDocs(usersCollection);
+            const users=querySnapshot.docs.map(doc=>({
+                id:doc.id,...doc.data()
+            }));
+            setUsersData(users);
         } catch (error) {
             console.log(error.message);
         }
