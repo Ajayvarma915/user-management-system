@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { setDoc, doc, getDoc, updateDoc} from 'firebase/firestore'
-import { db } from "@/app/firebase";
+import { db } from "../../firebase";
 import { GenerateHash } from "@/app/functions/GenerateHash";
 
 

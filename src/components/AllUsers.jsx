@@ -2,7 +2,7 @@ import { List, ListItem } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '@/app/firebase';
+import { db } from '.././app/firebase';
 const AllUsers = () => {
     const [userData,setUsersData]=useState([]);
     const fetchAllUsersData=async ()=>{
