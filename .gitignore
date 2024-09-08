@@ -37,6 +37,3 @@ next-env.d.ts
 
 .env
 
-# Firebase configuration
-firebase.jsx
-src/app/firebase.jsx
