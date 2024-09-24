@@ -1,10 +1,14 @@
-import { List, ListItem } from '@material-tailwind/react';
+import { Button, List, ListItem } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '.././app/firebase';
+import { useRouter } from 'next/navigation';
+
 const AllUsers = () => {
     const [userData,setUsersData]=useState([]);
+    const router=useRouter();
+
     const fetchAllUsersData=async ()=>{
         try {
             // const response = await fetch('api/users')
@@ -19,9 +23,11 @@ const AllUsers = () => {
             console.log(error.message);
         }
     }
+
     useEffect(()=>{
         fetchAllUsersData();
-    },[])
+    },[]);
+    
   return (
       <div className='h-full bg-[#7AB2B2] p-4 w-full'>
         <motion.h1 className='text-center text-3xl mt-4 md:text-2xl md:mt-5 2xl:mt-5 2xl:text-3xl'

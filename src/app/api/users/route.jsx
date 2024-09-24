@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { setDoc, doc, getDoc, updateDoc} from 'firebase/firestore'
 import { db } from "../../firebase";
 import { GenerateHash } from "@/app/functions/GenerateHash";
+import { auth } from "@/auth";
 
 
 export async function POST(req,res){
@@ -24,6 +25,8 @@ export async function POST(req,res){
 // updating the user data
 
 export async function PUT(req,res){
+    const session=await auth();
+    if(session?.user?.email==="admin@gmail.com"){
     let {id,name,email,userName,password}=await req.json();
     // console.log(id,name,email,password);
     const userDocRef=doc(db,'users',id);
@@ -44,5 +47,9 @@ export async function PUT(req,res){
         return NextResponse.json({ result: "user data updated successfully" }, { status: 200 });
     } catch (error) {
         return NextResponse.json({result:"failed to update users data"},{status:404});
+    }
+    }
+    else{
+        return NextResponse.json({result:"access unavailable"},{status:500});
     }
 }

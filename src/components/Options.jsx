@@ -15,7 +15,7 @@ const Options = () => {
                 <Sidebar setActiveComponent={setActiveComponent} />
             </div>
             {
-                activeComponent && <div className='w-full flex justify-center items-center h-full'>
+                activeComponent && <div className='w-full flex justify-center items-center h-full overflow-y-scroll'>
                     {activeComponent === 'AllUsers' && <AllUsers />}
                     {
                         activeComponent === 'specificUserData' && <SearchForSpecificUser />

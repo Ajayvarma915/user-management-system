@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {motion} from 'framer-motion'
+import { auth } from '@/auth';
+
 
 const DeleteUser = () => {
     const [id,setId]=useState('');
@@ -15,6 +17,11 @@ const DeleteUser = () => {
         const response=await fetch(`/api/users/${id}`,{
             method:'DELETE',
         })
+        if(response.status===500){
+            toast.error("Admin access required");
+            setId('');
+            return;
+        }
         if(response.status===200){
             toast('User Deleted Succesfully');
             setId('');

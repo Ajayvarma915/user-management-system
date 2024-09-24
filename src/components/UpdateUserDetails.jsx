@@ -45,6 +45,15 @@ const UpdateUserDetails = () => {
             },
             body: JSON.stringify(requestedData)
         })
+        if (response.status === 500) {
+            toast.error("Admin access required");
+            setId('');
+            setEmail('');
+            setUserName('');
+            setPassword('');
+            setName('');
+            return;
+        }
         if (response.status === 200) {
             toast('UserDetails Updated Successfully');
             setId('');
